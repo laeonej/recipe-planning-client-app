@@ -1,7 +1,12 @@
+import '@ui/index.css'
+import { Card } from '@ui/components'
+
 const Sample = () => {
     return (
-        <h1>Hello World</h1>
-    )
+        <Card>
+            <span className=' justify-center text-red-700'>SAMPLE TEXT</span>
+        </Card>  
+    );
 };
 
 export default Sample

@@ -1,5 +1,6 @@
 enum Routes {
     ROOT = '/',
+    LOGIN = '/login',
     SAMPLE = '/sample'
 }
 
