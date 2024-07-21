@@ -1,3 +1,13 @@
+# Starting the application
+
+1. Install docker.
+2. Run `./scripts/build.sh`
+
+
+
+
+The instructions below is for launching locally without docker
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
