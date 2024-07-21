@@ -8,7 +8,6 @@ WORKDIR /app
 COPY ./package*.json /app
 
 RUN yarn install
-RUN yarn tsc --init
 
 # Copying all the files in our project
 COPY . .
