@@ -1,11 +1,11 @@
 import '@ui/index.css'
-import { Card } from '@ui/components'
+import { TextInput } from '@ui/components'
 
 const Sample = () => {
     return (
-        <Card>
-            <span className=' justify-center text-red-700'>SAMPLE TEXT</span>
-        </Card>  
+
+        <TextInput type="text" label="123" subLabel='AAAA' subLabelLink='#'/>
+        
     );
 };
 
