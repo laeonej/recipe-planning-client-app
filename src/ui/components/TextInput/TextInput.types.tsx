@@ -9,6 +9,7 @@ export type TextInputProps = {
     subLabelLink?: string;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     required?: boolean;
+    value?: string;
 }
 
 

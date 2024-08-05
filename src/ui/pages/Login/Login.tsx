@@ -1,11 +1,55 @@
+// directory imports
 import '@ui/index.css'
-import { Button, TextInput } from '@ui/components';
-
-import { FaBowlFood } from 'react-icons/fa6'
-import { Link } from "react-router-dom";
+import { Button, Loader, TextInput } from '@ui/components';
 import routes from '@ui/routes/routes';
+import useLogin from '@ui/hooks/useLogin';
+
+
+// third party imports
+import { ChangeEvent, useState } from 'react';
+import { FaBowlFood } from 'react-icons/fa6'
+import { 
+    Link, 
+    useNavigate,
+    generatePath,
+    useLocation
+} from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const state  = location.state;
+    const { login, isLoading: isLoggingIn } = useLogin();
+    
+    const handleEmailInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+    }
+
+    const handlePasswordInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
+    }
+
+    const handleFormSubmit = async () => {
+        login({email, password},
+            {
+            onSuccess: () => {
+                let nextPath = routes.ROOT;
+                if (state && state.prevPath) {
+                    nextPath = state.prevPath
+                }
+                navigate(
+                    generatePath(nextPath)
+                )
+            }
+        });
+    }
+    
+
+    if (isLoggingIn) {
+        return <Loader/>
+    }
 
     return (
         <>
@@ -21,7 +65,14 @@ const Login = () => {
                 <div className=" mt-10 sm:mx-auto sm:w-full sm:max-w-sm md:mb-32 sm:mb space-y-6">
                     
                     <div>
-                        <TextInput required id="email" type="email" label="Email Address"/>
+                        <TextInput 
+                            required 
+                            id="email"
+                            type="email" 
+                            label="Email Address" 
+                            onChange={handleEmailInputChange} 
+                            value={email}
+                        />
                     </div>
 
                     <div>
@@ -32,14 +83,16 @@ const Login = () => {
                             label="Password"
                             subLabel="Forgot Password?"
                             subLabelLink={routes.SAMPLE}
+                            onChange={handlePasswordInputChange}
+                            value={password}
                         />
                     </div>
                 
                     <div>
-                        <Button fullWidth>Sign in</Button>
+                        <Button fullWidth onClick={handleFormSubmit}>Sign in</Button>
                     </div>
                     <p className=" mt-10 text-center text-sm text-gray-500 ">
-                            Don't have an accountg? <Link to={routes.SAMPLE}className=" font-semibold leading-6 text-orange-600 hover:text-orange-500">Sign Up</Link>
+                            Don't have an account? <Link to={routes.SAMPLE} className=" font-semibold leading-6 text-orange-600 hover:text-orange-500">Sign Up</Link>
                     </p> 
                 </div >
             </div>
