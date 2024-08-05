@@ -31,11 +31,24 @@ class UserService {
                 }
             },
             );
-
             return response.data
 
         } catch (error: any) {
             const errorMessage = "Failed To Retreive Auth Token"
+            throw new Error(errorMessage)
+        }
+    }
+
+    async getUser(): Promise<any> {
+        try {
+            const response = await this.http.get('/user', {
+                withCredentials: true
+            });
+
+            return response.data
+
+        } catch (error: any) {
+            const errorMessage = "Failed To Retreive User"
             throw new Error(errorMessage)
         }
     }

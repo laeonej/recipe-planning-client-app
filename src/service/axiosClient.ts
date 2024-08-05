@@ -7,6 +7,7 @@ class HttpClient {
         this.instance = axios.create({
             baseURL: process.env.REACT_APP_RECIPE_SERVICE_URL as string,
             timeout: 90000,
+            withCredentials: true,
         });
     } 
 
