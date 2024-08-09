@@ -16,12 +16,19 @@ const Login = lazy(() =>
     })),
 );
 
+const Signup = lazy(() => 
+    import('@ui/pages/Signup').then(({ Signup }) => ({
+        default: Signup,
+    })),
+);
+
 const Routing = () =>{
     return (
     <Suspense fallback={<Loader />}>
         <Routes>
             <Route path={routes.LOGIN} element={<Login/>}/>
             <Route path={routes.SAMPLE} element={<Sample/>}/>
+            <Route path={routes.SIGNUP} element={<Signup/>}/>
         </Routes>
     </Suspense>
 )};
