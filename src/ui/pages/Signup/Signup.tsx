@@ -167,7 +167,7 @@ const Signup = () => {
                             fullWidth 
                             onClick={handleFormSubmit} 
                             disabled={ !email || !username || !password || password!==confirmPassword}>
-                            Sign in
+                            Sign Up
                         </Button>
                     </div>
                 </div>
