@@ -12,7 +12,6 @@ import {
     Link, 
     useNavigate,
     generatePath,
-    useLocation
 } from "react-router-dom";
 import { AuthContext } from '@src/ui/contexts/AuthContext';
 
@@ -136,7 +135,6 @@ const Signup = () => {
                     <div>
                         <Hover 
                             icon={FaCircleQuestion}
-                            label='hi'
                             size ={24}
                             // textBoxWidth='200px'
                             color='black'
