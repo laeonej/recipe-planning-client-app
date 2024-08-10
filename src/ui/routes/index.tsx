@@ -18,6 +18,12 @@ const Login = lazy(() =>
     })),
 );
 
+const Signup = lazy(() => 
+    import('@ui/pages/Signup').then(({ Signup }) => ({
+        default: Signup,
+    })),
+);
+
 const PrivateRoutes = () => {
     const data = useGetAuth();
     const { setAuthenticated } = useContext(AuthContext);
@@ -35,6 +41,7 @@ const Routing = () =>{
         <Routes>
             <Route path={routes.LOGIN} element={<Login/>}/>
             <Route path={routes.SAMPLE} element={<Sample/>}/>
+            <Route path={routes.SIGNUP} element={<Signup/>}/>
             <Route element={<PrivateRoutes/>}>
                 <Route path={routes.ROOT} element={<Sample/>}/>
             </Route>

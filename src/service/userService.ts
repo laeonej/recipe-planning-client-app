@@ -7,6 +7,12 @@ export type UserLoginBody = {
     password: string
 }
 
+export type UserSignupBody = {
+    email: string,
+    username: string,
+    password: string
+}
+
 export type LoginResponse = {
     access_token: string,
     token_type: string,
@@ -18,6 +24,28 @@ class UserService {
     constructor(http: AxiosInstance) {
         this.http = http;
     };
+
+    async signup(userData: UserSignupBody): Promise<any>  {
+        try {
+            const response = await this.http.post('/signup', {
+                email: userData.email,
+                username: userData.username,
+                password: userData.password,
+            },
+            {
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }
+            );
+            return response.data
+
+        } catch (error: any) {
+            const errorMessage = "Failed To Sign Up"
+            throw new Error(errorMessage)
+        }
+    }
+
 
     async login(userData: UserLoginBody): Promise<LoginResponse>  {
         try {

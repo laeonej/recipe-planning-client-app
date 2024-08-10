@@ -96,10 +96,10 @@ const Login = () => {
                     </div>
                 
                     <div>
-                        <Button fullWidth onClick={handleFormSubmit}>Sign in</Button>
+                        <Button fullWidth onClick={handleFormSubmit} disabled={!email || !password}>Sign in</Button>
                     </div>
                     <p className=" mt-10 text-center text-sm text-gray-500 ">
-                            Don't have an account? <Link to={routes.SAMPLE} className=" font-semibold leading-6 text-orange-600 hover:text-orange-500">Sign Up</Link>
+                            Don't have an account? <Link to={routes.SIGNUP} className=" font-semibold leading-6 text-orange-600 hover:text-orange-500">Sign Up</Link>
                     </p> 
                 </div >
             </div>

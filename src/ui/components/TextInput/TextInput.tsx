@@ -13,7 +13,7 @@ const TextInput = ({
     value,
 } : TextInputProps) => {
     return (
-        <>
+        <div>
             <div className=" flex items-center justify-between ">
                 <label className="block text-sm font-medium leading-6 text-gray-900">{label}</label>
                 {subLabelLink ? <Link className="font-semibold text-orange-600 hover:text-orange-500 text-sm" to={subLabelLink}>{subLabel}</Link> : 
@@ -30,7 +30,7 @@ const TextInput = ({
                 value={value}
                 />
             </div>
-        </>
+        </div>
     );
 };
 
