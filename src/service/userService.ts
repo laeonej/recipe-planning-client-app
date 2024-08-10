@@ -86,7 +86,7 @@ class UserService {
 
     async getAuth(): Promise<Boolean> {
         try {
-            const response = await this.http.get('/check_cookie');
+            const response = await this.http.get('/test_cookie');
             console.log(response)
             return response.status === 200;
         } catch (error: any) {
