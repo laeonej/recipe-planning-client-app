@@ -1,7 +1,6 @@
 // directory imports
 import '@ui/index.css'
-import { Button, Loader, TextInput} from '@ui/components';
-import { Hover } from '@src/ui/components/Hover';
+import { Button, Loader, TextInput, Hover} from '@ui/components';
 import routes from '@ui/routes/routes';
 import useSignup from '@ui/hooks/useSignup';
 
