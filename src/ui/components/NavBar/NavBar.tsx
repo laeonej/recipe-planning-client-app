@@ -13,7 +13,6 @@ const NavBar = () => {
                 <Nav routeTo={routes.ROOT} direction='left'><FaBowlFood className='h-6 w-auto'/></Nav>
                 <Nav routeTo={routes.ROOT} label='Recipes' direction='left'/>
                 <Nav routeTo={routes.ROOT} label='Meal Plan' direction='left'/>
-                {/* When the user is signed in display user icon other wise display login and sign up */}
                 <Nav routeTo={routes.ROOT} direction='right'><FaRegUserCircle className='h-6 w-auto'/></Nav>
                 <Nav routeTo={routes.LOGIN} label='Login' direction='right'/>
                 <Nav routeTo={routes.SIGNUP} label='Sign Up' direction='right'/>

@@ -3,9 +3,9 @@ import { NavProps } from "./Nav.types";
 
 const Nav = ({children, routeTo, label, direction} : NavProps) => {
 
-    let linkTailWindClass = 'p-5 inline hover:bg-orange-500 float-left '
+    let linkTailWindClass = 'py-5 px-4 inline hover:bg-orange-500 float-left '
     if (direction === 'right') {
-        linkTailWindClass = 'p-5 inline hover:bg-orange-500 float-right'
+        linkTailWindClass = 'py-5 px-4 inline hover:bg-orange-500 float-right'
     };
 
     return (
