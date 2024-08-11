@@ -3,7 +3,6 @@ import { useState } from "react";
 
 const Hover = ({
     icon: Icon,
-    label,
     size,
     // textBoxWidth = '100px',
     color = 'black',

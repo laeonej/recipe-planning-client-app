@@ -1,7 +1,6 @@
 // directory imports
 import '@ui/index.css'
-import { Button, Loader, TextInput} from '@ui/components';
-import { Hover } from '@src/ui/components/Hover';
+import { Button, Loader, TextInput, Hover} from '@ui/components';
 import routes from '@ui/routes/routes';
 import useSignup from '@ui/hooks/useSignup';
 
@@ -13,7 +12,6 @@ import {
     Link, 
     useNavigate,
     generatePath,
-    useLocation
 } from "react-router-dom";
 import { AuthContext } from '@src/ui/contexts/AuthContext';
 
@@ -137,7 +135,6 @@ const Signup = () => {
                     <div>
                         <Hover 
                             icon={FaCircleQuestion}
-                            label='hi'
                             size ={24}
                             // textBoxWidth='200px'
                             color='black'
