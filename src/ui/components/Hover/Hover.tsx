@@ -1,37 +1,21 @@
 import { HoverProps } from "./Hover.types";
-import { useState } from "react";
+import { Tooltip } from "flowbite-react"
 
 const Hover = ({
     icon: Icon,
-    label,
     size,
-    // textBoxWidth = '100px',
     color = 'black',
+    hoverPosition = 'top',
     hoverText
 } : HoverProps) => {
 
 
-
-    const [isHovered, setIsHovered] = useState(false)
-
     return (
-        <div >
-            <button onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}>
-            <Icon size={size} color={color} className="mr-2"/>
+        <Tooltip content={hoverText} style="light" placement={hoverPosition} className="w-max ml-2 text-sm mr-2 inline-flex">
+            <button>
+                <Icon size={size} color={color} className="mr-2"/>
             </button>
-
-            {isHovered && (
-                <div className="absolute z-50 px-6 py-3 bg-white text-gray-900 text-sm rounded-md shadow-sm ring-1 ring-inset ring-gray-300 "
-                    // style={{width: textBoxWidth}}
-                >
-                    {hoverText}
-                </div>
-            )}
-        </div>
-        
-        
-         
+        </Tooltip>
     )
 }
 

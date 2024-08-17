@@ -1,12 +1,12 @@
 import { MouseEventHandler } from "react";
 import { IconType } from "react-icons";
 
+type Placement = 'top' | 'bottom' | 'left' | 'right'
 
 export type HoverProps = {
     icon: IconType;
-    label: string;
     size: number;
-    // textBoxWidth: string;
     color?: string;
+    hoverPosition?: Placement;
     hoverText: React.ReactNode;
 }

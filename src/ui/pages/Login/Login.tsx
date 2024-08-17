@@ -4,7 +4,6 @@ import { Button, Loader, TextInput } from '@ui/components';
 import routes from '@ui/routes/routes';
 import useLogin from '@ui/hooks/useLogin';
 
-
 // third party imports
 import { ChangeEvent, useState } from 'react';
 import { FaBowlFood } from 'react-icons/fa6'
@@ -96,6 +95,7 @@ const Login = () => {
                     </p> 
                 </div >
             </div>
+
         
         </>
     )
