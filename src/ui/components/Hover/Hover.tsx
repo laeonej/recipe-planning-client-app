@@ -6,12 +6,12 @@ const Hover = ({
     size,
     color = 'black',
     hoverPosition = 'top',
-    hoverText
+    hoverContent
 } : HoverProps) => {
 
 
     return (
-        <Tooltip content={hoverText} style="light" placement={hoverPosition} className="w-max ml-2 text-sm mr-2 inline-flex">
+        <Tooltip content={hoverContent} style="light" placement={hoverPosition} className="w-max ml-2 text-sm mr-2 inline-flex">
             <button>
                 <Icon size={size} color={color} className="mr-2"/>
             </button>

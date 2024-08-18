@@ -140,7 +140,7 @@ const Signup = () => {
                                 size ={24}
                                 color='black'
                                 hoverPosition="bottom"
-                                hoverText={
+                                hoverContent={
                                         <ul className='list-disc ml-2'>Password must contain
                                             <li>8 characters</li>
                                             <li>Uppercase letters</li>

@@ -8,5 +8,5 @@ export type HoverProps = {
     size: number;
     color?: string;
     hoverPosition?: Placement;
-    hoverText: React.ReactNode;
+    hoverContent: React.ReactNode;
 }
