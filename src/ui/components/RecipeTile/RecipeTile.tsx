@@ -33,7 +33,7 @@ const RecipeTile = ({
         <div className=" bg-white w-64 h-64 rounded-lg border-2 border-solid border-black hover:border-red-500 hover:cursor-pointer" onClick={handleClick}>
             <div className="relative h-2/3 w-full rounded-t-l">
                 <div className='absolute h-full w-full overflow-hidden'>
-                    <img className="rounded-t-md w-auto" src={imageSrc} alt="recipe cover"/>
+                    <img className="rounded-t-md w-full h-full object-fill" src={imageSrc} alt="recipe cover"/>
                 </div>
                 <div className="absolute w-full h-full flex justify-end">
                     <Pill label={`✍:${author}`} color='orange'></Pill>
