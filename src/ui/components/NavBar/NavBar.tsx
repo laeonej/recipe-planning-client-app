@@ -15,7 +15,7 @@ const NavBar = () => {
                 <Nav routeTo={routes.ROOT} label='Meal Plan' direction='left'/>
                 <Nav routeTo={routes.ROOT} direction='right'><FaRegUserCircle className='h-6 w-auto'/></Nav>
                 <Nav routeTo={routes.LOGIN} label='Login' direction='right'/>
-                <Nav routeTo={routes.SIGNUP} label='Sign Up' direction='right'/>
+                {/* <Nav routeTo={routes.SIGNUP} label='Sign Up' direction='right'/> */}
             </ul>
         </>
     )
