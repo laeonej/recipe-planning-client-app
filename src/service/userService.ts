@@ -67,6 +67,8 @@ class UserService {
         }
     }
 
+    // this is a sample get query. Update when we implement
+    // user page.
     async getUser(): Promise<any> {
         try {
             const response = await this.http.get('/user', {
@@ -78,6 +80,17 @@ class UserService {
         } catch (error: any) {
             const errorMessage = "Failed To Retreive User"
             throw new Error(errorMessage)
+        }
+    }
+
+
+    async getAuth(): Promise<Boolean> {
+        try {
+            const response = await this.http.get('/test_cookie');
+            console.log(response)
+            return response.status === 200;
+        } catch (error: any) {
+            return false;
         }
     }
 

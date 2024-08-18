@@ -5,7 +5,7 @@ import routes from '@ui/routes/routes';
 import useLogin from '@ui/hooks/useLogin';
 
 // third party imports
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { FaBowlFood } from 'react-icons/fa6'
 import { 
     Link, 
@@ -13,10 +13,12 @@ import {
     generatePath,
     useLocation
 } from "react-router-dom";
+import { AuthContext } from '@ui/contexts/AuthContext';
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { authenticated, setAuthenticated } = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const state  = location.state;
@@ -34,6 +36,7 @@ const Login = () => {
         login({email, password},
             {
             onSuccess: () => {
+                setAuthenticated(true)
                 let nextPath = routes.ROOT;
                 if (state && state.prevPath) {
                     nextPath = state.prevPath
@@ -44,8 +47,12 @@ const Login = () => {
             }
         });
     }
-    
 
+    if (authenticated) {
+        navigate(generatePath(routes.ROOT))
+    }
+
+    
     if (isLoggingIn) {
         return <Loader/>
     }

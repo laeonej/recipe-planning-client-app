@@ -1,30 +1,28 @@
 // directory imports
 import '@ui/index.css'
-import { Button, Loader, TextInput} from '@ui/components';
-import { Hover } from '@src/ui/components/Hover';
+import { Button, Loader, TextInput, Hover} from '@ui/components';
 import routes from '@ui/routes/routes';
 import useSignup from '@ui/hooks/useSignup';
 
 
 
 // third party imports
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { FaBowlFood, FaCircleQuestion } from 'react-icons/fa6'
 import { 
     Link, 
     useNavigate,
     generatePath,
-    useLocation
 } from "react-router-dom";
+import { AuthContext } from '@src/ui/contexts/AuthContext';
 
 const Signup = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    const { authenticated, setAuthenticated } = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const state  = location.state;
     const { signup, isLoading: isSigningUp } = useSignup();
     const [errorMessage, setErrorMessage] = useState('')
     
@@ -45,25 +43,22 @@ const Signup = () => {
     }
 
     const handleFormSubmit = async () => {
-        const isValidPassword = validPassword()
-        const isValidEmail = validEmail()
+        const isValidPassword = validPassword();
+        const isValidEmail = validEmail();
 
         if (isValidPassword && isValidEmail) {
-            setErrorMessage('')
+            setErrorMessage('');
             signup({email, username, password},
                 {
                 onSuccess: () => {
-                    console.log("signup successful")
-                    let nextPath = routes.ROOT;
-                    if (state && state.prevPath) {
-                        nextPath = state.prevPath
-                    }
+                    setAuthenticated(true);
+                    console.log("signup successful");
+                    
                     navigate(
-                        generatePath(nextPath)
-                    )
+                        generatePath(routes.ROOT)
+                    );
                 }
             });
-
         } else if (!isValidPassword) {
             setErrorMessage("Please enter a valid password")
         } else if (!isValidEmail) {
@@ -88,6 +83,9 @@ const Signup = () => {
         return hasLowerCase && hasUppercase && hasNumber
     }
     
+    if (authenticated) {
+        navigate(generatePath(routes.ROOT))
+    }
 
     if (isSigningUp) {
         return <Loader/>
