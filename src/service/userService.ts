@@ -17,6 +17,10 @@ export type LoginResponse = {
     user_id: number
 }
 
+export type SignupResponse = {
+    user_id: number
+}
+
 class UserService {
     http: AxiosInstance;
 
@@ -24,7 +28,7 @@ class UserService {
         this.http = http;
     };
 
-    async signup(userData: UserSignupBody): Promise<LoginResponse>  {
+    async signup(userData: UserSignupBody): Promise<SignupResponse>  {
         try {
             const response = await this.http.post('/signup', {
                 email: userData.email,
