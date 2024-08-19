@@ -14,8 +14,11 @@ export type UserSignupBody = {
 }
 
 export type LoginResponse = {
-    access_token: string,
-    token_type: string,
+    user_id: number
+}
+
+export type SignupResponse = {
+    user_id: number
 }
 
 class UserService {
@@ -25,7 +28,7 @@ class UserService {
         this.http = http;
     };
 
-    async signup(userData: UserSignupBody): Promise<any>  {
+    async signup(userData: UserSignupBody): Promise<SignupResponse>  {
         try {
             const response = await this.http.post('/signup', {
                 email: userData.email,

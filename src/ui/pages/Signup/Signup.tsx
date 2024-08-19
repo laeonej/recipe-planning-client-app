@@ -15,10 +15,12 @@ import {
     generatePath,
 } from "react-router-dom";
 import { AuthContext } from '@src/ui/contexts/AuthContext';
+import { UserContext } from '@src/ui/contexts/UserContext';
 
 const Signup = () => {
     const navigate = useNavigate();
     const { authenticated, setAuthenticated } = useContext(AuthContext)
+    const { setUser } = useContext(UserContext)
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -50,10 +52,10 @@ const Signup = () => {
             setErrorMessage('');
             signup({email, username, password},
                 {
-                onSuccess: () => {
+                onSuccess: (result) => {
                     setAuthenticated(true);
+                    setUser(result.user_id)
                     console.log("signup successful");
-                    
                     navigate(
                         generatePath(routes.ROOT)
                     );
