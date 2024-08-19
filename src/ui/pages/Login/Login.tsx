@@ -15,11 +15,13 @@ import {
     useLocation
 } from "react-router-dom";
 import { AuthContext } from '@ui/contexts/AuthContext';
+import { UserContext } from '@ui/contexts/UserContext';
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { authenticated, setAuthenticated } = useContext(AuthContext)
+    const { setUser } = useContext(UserContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const state  = location.state;
@@ -36,8 +38,9 @@ const Login = () => {
     const handleFormSubmit = async () => {
         login({email, password},
             {
-            onSuccess: () => {
+            onSuccess: (result) => {
                 setAuthenticated(true)
+                setUser(result.user_id)
                 let nextPath = routes.ROOT;
                 if (state && state.prevPath) {
                     nextPath = state.prevPath
