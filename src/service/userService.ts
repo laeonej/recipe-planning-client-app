@@ -41,11 +41,11 @@ class UserService {
                 }
             }
             );
-            return response.data
+            return response.data;
 
         } catch (error: any) {
-            const errorMessage = "Failed To Sign Up"
-            throw new Error(errorMessage)
+            const errorMessage = "Failed To Sign Up";
+            throw new Error(errorMessage);
         }
     }
 
@@ -62,11 +62,11 @@ class UserService {
                 }
             },
             );
-            return response.data
+            return response.data;
 
         } catch (error: any) {
-            const errorMessage = "Failed To Retreive Auth Token"
-            throw new Error(errorMessage)
+            const errorMessage = "Failed To Retreive Auth Token";
+            throw new Error(errorMessage);
         }
     }
 
@@ -78,11 +78,11 @@ class UserService {
                 withCredentials: true
             });
 
-            return response.data
+            return response.data;
 
         } catch (error: any) {
-            const errorMessage = "Failed To Retreive User"
-            throw new Error(errorMessage)
+            const errorMessage = "Failed To Retreive User";
+            throw new Error(errorMessage);
         }
     }
 
@@ -90,7 +90,6 @@ class UserService {
     async getAuth(): Promise<Boolean> {
         try {
             const response = await this.http.get('/test_cookie');
-            console.log(response)
             return response.status === 200;
         } catch (error: any) {
             return false;
@@ -99,5 +98,5 @@ class UserService {
 
         
 };
-const userService = new UserService(axiosClient.getInstance())
+const userService = new UserService(axiosClient.getInstance());
 export default userService;
