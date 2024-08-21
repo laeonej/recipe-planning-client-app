@@ -4,8 +4,6 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom"
 
 import routes from './routes'
 import { AuthContext } from "@src/ui/contexts/AuthContext";
-import { UserContext } from "../contexts/UserContext";
-import useGetAuth from "@ui/hooks/useGetAuth";
 
 const Sample = lazy(() => 
     import('@ui/pages/Sample').then(({ Sample }) => ({
@@ -33,12 +31,9 @@ const Recipe = lazy(() =>
 );
 
 const PrivateRoutes = () => {
-    const data = useGetAuth();
-    const { setAuthenticated } = useContext(AuthContext);
-    const { setUser } = useContext(UserContext)
-    if (!data) {
-        setAuthenticated(false);
-        setUser(-1);
+
+    const { authenticated } = useContext(AuthContext);
+    if (!authenticated) {
         return <Navigate to={routes.LOGIN} replace/>;
     }
 
