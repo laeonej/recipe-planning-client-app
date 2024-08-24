@@ -3,12 +3,13 @@ import UserService from '@service/userService';
 
 
 const useGetAuth = () => {
-    const { data } = useQuery('getAuth',
-        async () => UserService.getAuth()
+    const { data, isLoading } = useQuery('getAuth',
+        async () => await UserService.getAuth()
     );
 
     return {
-        data
+        data,
+        isLoading
     };
 };
 
