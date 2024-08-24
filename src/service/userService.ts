@@ -21,6 +21,11 @@ export type SignupResponse = {
     user_id: number
 }
 
+export type AuthResponse = {
+    email: string,
+    user_id: number,
+}
+
 class UserService {
     http: AxiosInstance;
 
@@ -72,12 +77,12 @@ class UserService {
 
     // this is a sample get query. Update when we implement
     // user page.
-    async getUser(): Promise<any> {
+    async getUser(): Promise<Boolean> {
         try {
             const response = await this.http.get('/user', {
                 withCredentials: true
             });
-
+            return true
             return response.data;
 
         } catch (error: any) {
@@ -87,12 +92,13 @@ class UserService {
     }
 
 
-    async getAuth(): Promise<Boolean> {
+    async getAuth(): Promise<AuthResponse | null> {
         try {
-            const response = await this.http.get('/test_cookie');
-            return response.status === 200;
+            const response = await this.http.get('/get_cookie_info');
+
+            return response.data
         } catch (error: any) {
-            return false;
+            return null;
         }
     }
 

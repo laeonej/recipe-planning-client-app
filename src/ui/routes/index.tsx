@@ -1,9 +1,11 @@
-import { lazy, Suspense, useContext } from "react"
+import { lazy, Suspense, useContext, useEffect } from "react"
 import Loader from "../components/Loader/Loader"
 import { Navigate, Outlet, Route, Routes } from "react-router-dom"
 
 import routes from './routes'
 import { AuthContext } from "@src/ui/contexts/AuthContext";
+import useGetAuth from "../hooks/useGetAuth";
+import { UserContext } from "../contexts/UserContext";
 
 const Sample = lazy(() => 
     import('@ui/pages/Sample').then(({ Sample }) => ({
@@ -31,13 +33,31 @@ const Recipe = lazy(() =>
 );
 
 const PrivateRoutes = () => {
+    const {data, isLoading} = useGetAuth();
+    const { setAuthenticated } = useContext(AuthContext);
+    const { setUser } = useContext(UserContext)
 
-    const { authenticated } = useContext(AuthContext);
-    if (!authenticated) {
-        return <Navigate to={routes.LOGIN} replace/>;
+    useEffect(() => {
+        if (data !== null && data !== undefined) {
+            setUser(data.user_id)
+            console.log("reached")
+        }
+    }, [data, setUser])
+
+    if (isLoading) {
+        return <Loader/>
     }
 
-    return <Outlet/>
+    if (data === null || data === undefined) {
+        return <Navigate to={routes.LOGIN} replace/>;
+    }
+    
+    
+    return (
+        <>
+            {data && <Outlet/>}
+        </>
+    )
 }
 
 const Routing = () =>{
