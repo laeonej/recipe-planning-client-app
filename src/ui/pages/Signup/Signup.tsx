@@ -96,7 +96,8 @@ const Signup = () => {
 
     return (
         <>
-            <div className=" flex h-screen content-center from-orange-300 to-yellow-200 bg-gradient-to-b flex-col justify-center px-6 py-10 mb-1/2 lg:px-8 m-auto">
+            {isAuthenticated && <Loader/>}
+            {!isAuthenticated && <div className=" flex h-screen content-center from-orange-300 to-yellow-200 bg-gradient-to-b flex-col justify-center px-6 py-10 mb-1/2 lg:px-8 m-auto">
                 <div className=" sm:mx-auto sm:w-full sm:max-w-sm">
                     <FaBowlFood className='mx-auto h-20 w-auto'/>
                 </div>
@@ -182,8 +183,7 @@ const Signup = () => {
                      
                 </div>
             </div>
-            
-        
+            }
         </>
     )
 };
