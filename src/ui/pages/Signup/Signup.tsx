@@ -5,22 +5,21 @@ import routes from '@ui/routes/routes';
 import useSignup from '@ui/hooks/useSignup';
 
 
-
 // third party imports
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { FaBowlFood, FaCircleQuestion } from 'react-icons/fa6'
 import { 
     Link, 
     useNavigate,
     generatePath,
 } from "react-router-dom";
-import { AuthContext } from '@src/ui/contexts/AuthContext';
-import { UserContext } from '@src/ui/contexts/UserContext';
+import { useAuthStore, useUserStore } from '@ui/states';
 
 const Signup = () => {
     const navigate = useNavigate();
-    const { authenticated, setAuthenticated } = useContext(AuthContext)
-    const { setUser } = useContext(UserContext)
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+    const setAuthed = useAuthStore((state) => state.setAuthed);
+    const setUserId = useUserStore((state) => state.setUserId);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -53,8 +52,8 @@ const Signup = () => {
             signup({email, username, password},
                 {
                 onSuccess: (result) => {
-                    setAuthenticated(true);
-                    setUser(result.user_id)
+                    setAuthed(true);
+                    setUserId(result.user_id)
                     console.log("signup successful");
                     navigate(
                         generatePath(routes.ROOT)
@@ -85,12 +84,14 @@ const Signup = () => {
         return hasLowerCase && hasUppercase && hasNumber
     }
     
-    if (authenticated) {
-        navigate(generatePath(routes.ROOT))
-    }
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate(generatePath(routes.ROOT));
+        }
+    }, [isAuthenticated, navigate]);
 
     if (isSigningUp) {
-        return <Loader/>
+        return <Loader/>;
     }
 
     return (

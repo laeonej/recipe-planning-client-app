@@ -5,7 +5,7 @@ import routes from '@ui/routes/routes';
 import useLogin from '@ui/hooks/useLogin';
 
 // third party imports
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { FaBowlFood } from 'react-icons/fa6'
 import { 
     Link, 
@@ -13,14 +13,14 @@ import {
     generatePath,
     useLocation
 } from "react-router-dom";
-import { AuthContext } from '@ui/contexts/AuthContext';
-import { UserContext } from '@ui/contexts/UserContext';
+import { useAuthStore, useUserStore } from '@src/ui/states';
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { authenticated, setAuthenticated } = useContext(AuthContext)
-    const { setUser } = useContext(UserContext)
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+    const setAuthed = useAuthStore((state) => state.setAuthed);
+    const setUserId = useUserStore((state) => state.setUserId);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const state  = location.state;
@@ -38,8 +38,8 @@ const Login = () => {
         login({email, password},
             {
             onSuccess: (result) => {
-                setAuthenticated(true)
-                setUser(result.user_id)
+                setAuthed(true);
+                setUserId(result.user_id);
                 let nextPath = routes.ROOT;
                 if (state && state.prevPath) {
                     nextPath = state.prevPath
@@ -51,10 +51,11 @@ const Login = () => {
         });
     }
 
-    if (authenticated) {
-        navigate(generatePath(routes.ROOT))
-    }
-
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate(generatePath(routes.ROOT));
+        }
+    }, [isAuthenticated, navigate])
     
     if (isLoggingIn) {
         return <Loader/>
@@ -62,7 +63,8 @@ const Login = () => {
 
     return (
         <>
-            <div className=" flex h-screen content-center from-orange-300 to-yellow-200 bg-gradient-to-b flex-col justify-center px-6 py-10 mb-1/2 lg:px-8 m-auto">
+            {isAuthenticated && <Loader/>}
+            {!isAuthenticated && <div className=" flex h-screen content-center from-orange-300 to-yellow-200 bg-gradient-to-b flex-col justify-center px-6 py-10 mb-1/2 lg:px-8 m-auto">
                 <div className=" sm:mx-auto sm:w-full sm:max-w-sm">
                     <FaBowlFood className='mx-auto h-20 w-auto'/>
                 </div>
@@ -105,6 +107,7 @@ const Login = () => {
                     </p> 
                 </div >
             </div>
+            }
 
         
         </>
