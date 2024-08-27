@@ -82,7 +82,6 @@ class UserService {
             const response = await this.http.get('/user', {
                 withCredentials: true
             });
-            return true
             return response.data;
 
         } catch (error: any) {
@@ -95,7 +94,7 @@ class UserService {
     async getAuth(): Promise<AuthResponse | null> {
         try {
             const response = await this.http.get('/get_cookie_info');
-
+                
             return response.data
         } catch (error: any) {
             return null;

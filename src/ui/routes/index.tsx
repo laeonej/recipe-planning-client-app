@@ -1,11 +1,10 @@
-import { lazy, Suspense, useContext, useEffect } from "react"
+import { lazy, Suspense, useEffect } from "react"
 import Loader from "../components/Loader/Loader"
 import { Navigate, Outlet, Route, Routes } from "react-router-dom"
 
 import routes from './routes'
-import { AuthContext } from "@src/ui/contexts/AuthContext";
 import useGetAuth from "../hooks/useGetAuth";
-import { UserContext } from "../contexts/UserContext";
+import { useAuthStore, useUserStore } from '@ui/states';
 
 const Sample = lazy(() => 
     import('@ui/pages/Sample').then(({ Sample }) => ({
@@ -33,43 +32,37 @@ const Recipe = lazy(() =>
 );
 
 const PrivateRoutes = () => {
-    const {data, isLoading} = useGetAuth();
-    const { setAuthenticated } = useContext(AuthContext);
-    const { setUser } = useContext(UserContext)
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-    useEffect(() => {
-        if (data !== null && data !== undefined) {
-            setUser(data.user_id)
-            console.log("reached")
-        }
-    }, [data, setUser])
-
-    if (isLoading) {
-        return <Loader/>
-    }
-
-    if (data === null || data === undefined) {
+    if (!isAuthenticated) {
         return <Navigate to={routes.LOGIN} replace/>;
     }
     
-    
     return (
-        <>
-            {data && <Outlet/>}
-        </>
+        <Outlet/>
     )
 }
 
-const Routing = () =>{
+const Routing = () => {
+    const { data } = useGetAuth();
+    const setAuthed = useAuthStore((state) => state.setAuthed);
+    const setUserId = useUserStore((state) => state.setUserId);
+    useEffect(() => {
+        if (data !== null && data !== undefined) {
+            setAuthed(true);
+            setUserId(data.user_id);
+        }
+    }, [data, setAuthed, setUserId])
+
     return (
     <Suspense fallback={<Loader />}>
         <Routes>
             <Route path={routes.LOGIN} element={<Login/>}/>
-            <Route path={routes.SAMPLE} element={<Sample/>}/>
+            <Route path={routes.ROOT} element={<Sample/>}/>
             <Route path={routes.SIGNUP} element={<Signup/>}/>
             <Route path={routes.RECIPE} element={<Recipe/>}/>
             <Route element={<PrivateRoutes/>}>
-                <Route path={routes.ROOT} element={<Sample/>}/>
+                <Route path={routes.SAMPLE} element={<Sample/>}/>
             </Route>
         </Routes>
     </Suspense>
