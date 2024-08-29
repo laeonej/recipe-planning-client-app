@@ -24,10 +24,9 @@ const Signup = lazy(() =>
     })),
 );
 
-// TODO: Update when view recipe page is created
 const Recipe = lazy(() => 
-    import('@ui/pages/Sample').then(({ Sample }) => ({
-        default: Sample,
+    import('@ui/pages/Recipe').then(({ Recipe }) => ({
+        default: Recipe,
     }))
 );
 
@@ -60,7 +59,7 @@ const Routing = () => {
             <Route path={routes.LOGIN} element={<Login/>}/>
             <Route path={routes.ROOT} element={<Sample/>}/>
             <Route path={routes.SIGNUP} element={<Signup/>}/>
-            <Route path={routes.RECIPE} element={<Recipe/>}/>
+            <Route path={routes.RECIPE_DETAIL} element={<Recipe/>}/>
             <Route element={<PrivateRoutes/>}>
                 <Route path={routes.SAMPLE} element={<Sample/>}/>
             </Route>
