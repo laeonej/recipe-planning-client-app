@@ -8,7 +8,7 @@ const RecipeInstruction = ({ instruction, step }: RecipeInstructionProp) => {
             <span className="col-span-1 flex justify-center items-center ">
                 <p>{step}.</p>
             </span>
-            <span className='col-span-9'>
+            <span className='col-span-9 overflow-auto'>
                 <p>{instruction}</p>
             </span>
              

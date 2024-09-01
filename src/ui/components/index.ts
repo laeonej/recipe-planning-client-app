@@ -6,4 +6,4 @@ export { NavBar } from './NavBar';
 export { RecipeTile } from './RecipeTile';
 export { Pill } from './Pill';
 export { RecipeInstruction } from './RecipeInstruction';
-export { RecipeMacrosCard } from './RecipeMacrosCard';
+export { Card } from './Card';
