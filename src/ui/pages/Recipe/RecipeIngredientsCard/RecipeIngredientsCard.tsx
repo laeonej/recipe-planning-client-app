@@ -21,7 +21,7 @@ const RecipeIngredientsCard = ({ingredients}: RecipeIngredientsCardProps) => {
             <div className="grid grid-cols-1 mx-4 mb-3 overflow-auto divide-y">
                 {ingredients.map(
                     (ingredient) => (
-                        <div className="grid grid-cols-3">
+                        <div className="grid grid-cols-3" key={ingredient.name}>
                             <li className="col-span-2 overflow-auto my-1">{ingredient.name}</li>
                             <span className="flex justify-end items-center my-1">{ingredient.amount} {ingredient.unit}</span>
                         </div>
