@@ -2,7 +2,8 @@ enum Routes {
     ROOT = '/',
     LOGIN = '/login',
     SIGNUP = '/signup',
-    RECIPE = '/recipe/:recipeId',
+    RECIPE = '/recipe',
+    RECIPE_DETAIL = '/recipe/:recipeId',
     SAMPLE = '/sample'
 }
 

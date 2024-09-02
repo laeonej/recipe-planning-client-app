@@ -2,7 +2,7 @@ import { PillProp } from "./Pill.types";
 
 const Pill = ({ children, label, color } : PillProp) => {
 
-    let divColor = `bg-gray-400 border-gray-500`
+    let divColor = `bg-gray-400 border-gray-500 `
     
 
     switch(color) {
@@ -20,10 +20,8 @@ const Pill = ({ children, label, color } : PillProp) => {
             break;
     }
 
-    const divClass = `h-fit flex justify-normal font-sans rounded-full p-0.5 m-0.5 border ${divColor}`
-
     return (
-        <div className={divClass}>
+        <div className={`h-fit max-w-fit flex justify-normal font-sans rounded-full p-0.5 m-0.5 border ${divColor}`}>
             {children}
             <p className="text-xs px-1">{label}</p>
         </div>

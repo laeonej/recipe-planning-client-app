@@ -7,7 +7,34 @@ module.exports = {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        slideRightIntoPosition: {
+          '0%': {
+            transform: `translateX(-50%)`,
+            opacity: 0,
+          },
+          '100%': {
+            transform: `translateX(0%)`,
+            opacity: 1,
+          }
+        },
+
+        fadeIn: {
+          'from': {
+            opacity: 0,
+          },
+          'to': {
+            opacity: 1,
+          }
+        }
+
+      },
+
+      animation: {
+
+      }
+    },
   },
   plugins: [
     flowbite.plugin(),

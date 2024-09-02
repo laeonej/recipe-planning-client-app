@@ -54,7 +54,7 @@ const RecipeTile = ({
                     {/* 2 - 3 tags displayed */}
                     {tags.map(
                         (tagName) => (
-                            <Pill key={tagName} label={tagName} color='sky'></Pill>
+                            <Pill key={tagName} label={tagName} color='sky'/>
                         )
                     )}
                 </div>

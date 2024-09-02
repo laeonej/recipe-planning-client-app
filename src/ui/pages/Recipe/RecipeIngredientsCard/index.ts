@@ -1,0 +1,1 @@
+export { default as RecipeIngredientsCard } from './RecipeIngredientsCard';
