@@ -28,7 +28,7 @@ const Recipe = () => {
                     <img alt="recipe result" src="https://cdn.dribbble.com/users/1012566/screenshots/4187820/media/985748436085f06bb2bd63686ff491a5.jpg?resize=400x300&vertical=center"/>
                 </div>
                 {/* quick info */}
-                <div className='col-span-1 flex flex-col sm:justify-evenly mx-8 sm:mx-0'>
+                <div className='col-span-1 flex flex-col sm:justify-evenly mx-8 sm:mx-0 animate-[fadeIn_2s] sm:animate-[slideRightIntoPosition_2s]'>
                     <div>
                         <div className=' font-serif font-extrabold text-3xl'>
                         Halal Truck Chicken And Rice
