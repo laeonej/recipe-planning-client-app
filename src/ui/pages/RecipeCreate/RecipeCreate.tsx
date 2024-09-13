@@ -17,8 +17,8 @@ const RecipeCreate = () => {
     const [description, setDescription] = useState('')
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
-    const [preptime, setPreptime] = useState('')
-    const [cooktime, setCooktime] = useState('')
+    const [preptime, setPreptime] = useState(0)
+    const [cooktime, setCooktime] = useState(0)
     const [servings, setServings] = useState(1)
 
     const [tagList, setTagList] = useState<string[]>([])
@@ -44,11 +44,11 @@ const RecipeCreate = () => {
     };
 
     const handlePreptimeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setPreptime(e.target.value)
+        setPreptime(Math.max(0, e.target.valueAsNumber))
     }
 
     const handleCooktimeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setCooktime(e.target.value)
+        setCooktime(Math.max(0, e.target.valueAsNumber))
     }
 
     const handleServingsChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -169,35 +169,35 @@ const RecipeCreate = () => {
                             </label>
                         </div>
 
-                        <div className='flex flex-row items-end space-x-4 justify-evenly'>
-                            <div className='w-1/3'>
+                        <div className='grid grid-cols-1 sm:grid-cols-3 items-end gap-2'>
+                            <div className='sm:col-span-1'>
                                 <TextInput
                                     required
                                     id="preptime"
-                                    type="text"
-                                    label="Prep Time"
+                                    type="number"
+                                    label="Prep Time (min)"
                                     onChange={handlePreptimeChange}
-                                    value={preptime}
+                                    value={isNaN(preptime) ? "0" : preptime.toString()}
                                 />
                             </div>
-                            <div className='w-1/3'>
+                            <div className='sm:col-span-1'>
                                 <TextInput
                                     required
                                     id="cooktime"
-                                    type="text"
-                                    label="Cook Time"
+                                    type="number"
+                                    label="Cook Time (min)"
                                     onChange={handleCooktimeChange}
-                                    value={cooktime}
+                                    value={isNaN(cooktime) ? "0" : cooktime.toString()}
                                 />
                             </div>
-                            <div className='w-1/3'>
+                            <div className='sm:col-span-1'>
                                 <TextInput 
                                     required
                                     id="servings"
                                     type="number"
                                     label="Servings"
                                     onChange={handleServingsChange}
-                                    value={isNaN(servings) ? "1" : servings.toString()}
+                                    value={isNaN(servings) ? "0" : servings.toString()}
                                 />
                             </div>
                         </div>
@@ -230,35 +230,35 @@ const RecipeCreate = () => {
 
 
 
-                        <div className='grid grid-cols-10 items-end gap-2'>
-                            <div className='col-span-2'>
+                        <div className='grid grid-cols-1 sm:grid-cols-10 items-end gap-2'>
+                            <div className='sm:col-span-2'>
                                 <TextInput
                                     id="protein"
                                     type="number"
-                                    label='🥩 P (g)'
+                                    label='🥩 Protein (g)'
                                     onChange={handleProteinChange}
                                     value={isNaN(protein) ? "0" : protein.toString()}
                                 />
                             </div>
-                            <div className='col-span-2'>
+                            <div className='sm:col-span-2'>
                                 <TextInput
                                     id="carbohydrates"
                                     type="number"
-                                    label='🍞 C (g)'
+                                    label='🍞 Carbs (g)'
                                     onChange={handleCarbohydrateChange}
                                     value={isNaN(carbohydrates) ? "0" : carbohydrates.toString()}
                                 />
                             </div>
-                            <div className='col-span-2'>
+                            <div className='sm:col-span-2'>
                                 <TextInput
                                     id="fats"
                                     type="number"
-                                    label='🧈 F (g)'
+                                    label='🧈 Fats (g)'
                                     onChange={handleFatChange}
                                     value={isNaN(fats) ? "0" : fats.toString()}
                                 />
                             </div>
-                            <div className='col-span-4'>
+                            <div className='sm:col-span-4'>
                                 <TextInput
                                     id="calories"
                                     type="number"
