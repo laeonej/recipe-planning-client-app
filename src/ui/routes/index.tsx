@@ -27,7 +27,13 @@ const Signup = lazy(() =>
 const Recipe = lazy(() => 
     import('@ui/pages/Recipe').then(({ Recipe }) => ({
         default: Recipe,
-    }))
+    })),
+);
+
+const MealPlan = lazy(() =>
+    import('@ui/pages/MealPlan').then(({ MealPlan }) => ({
+        default: MealPlan
+    })),
 );
 
 const PrivateRoutes = () => {
@@ -62,6 +68,7 @@ const Routing = () => {
             <Route path={routes.RECIPE_DETAIL} element={<Recipe/>}/>
             <Route element={<PrivateRoutes/>}>
                 <Route path={routes.SAMPLE} element={<Sample/>}/>
+                <Route path={routes.MEAL_PLAN} element={<MealPlan/>}/>
             </Route>
         </Routes>
     </Suspense>
