@@ -4,7 +4,7 @@ enum Routes {
     SIGNUP = '/signup',
     RECIPE = '/recipe',
     RECIPE_DETAIL = '/recipe/:recipeId',
-    RECIPECREATE = '/recipecreate',
+    RECIPE_CREATE = '/recipe_create',
     SAMPLE = '/sample'
 }
 

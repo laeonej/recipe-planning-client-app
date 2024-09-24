@@ -67,7 +67,7 @@ const Routing = () => {
             <Route path={routes.ROOT} element={<Sample/>}/>
             <Route path={routes.SIGNUP} element={<Signup/>}/>
             <Route path={routes.RECIPE_DETAIL} element={<Recipe/>}/>
-            <Route path={routes.RECIPECREATE} element={<RecipeCreate/>}/>
+            <Route path={routes.RECIPE_CREATE} element={<RecipeCreate/>}/>
             <Route element={<PrivateRoutes/>}>
                 <Route path={routes.SAMPLE} element={<Sample/>}/>
             </Route>
