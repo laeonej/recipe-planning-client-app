@@ -1,13 +1,7 @@
 import { RecipeCreateIngredientsProps } from "./RecipeCreateIngredients.types"
-import { Button, TextInput } from "@src/ui/components";
-import { RecipeIngredient } from "@src/ui/components/RecipeIngredient";
-import { DropdownSelect } from "@src/ui/components/DropdownSelect";
+import { Button, TextInput, RecipeIngredient, DropdownSelect } from "@src/ui/components";
 import { useState, useRef, useEffect, ChangeEvent } from "react";
 
-/**
- * npm install react-beautiful-dnd
- * npm install --save-dev @types/react-beautiful-dnd
- */
 
 
 const RecipeCreateIngredients = ({ingredientList, setIngredientList}: RecipeCreateIngredientsProps) => {
