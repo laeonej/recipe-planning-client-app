@@ -30,6 +30,13 @@ const Recipe = lazy(() =>
     }))
 );
 
+const RecipeCreate = lazy(() => 
+    import('@ui/pages/RecipeCreate').then(({ RecipeCreate }) => ({
+        default: RecipeCreate,
+    }))
+);
+
+
 const PrivateRoutes = () => {
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
@@ -60,6 +67,7 @@ const Routing = () => {
             <Route path={routes.ROOT} element={<Sample/>}/>
             <Route path={routes.SIGNUP} element={<Signup/>}/>
             <Route path={routes.RECIPE_DETAIL} element={<Recipe/>}/>
+            <Route path={routes.RECIPE_CREATE} element={<RecipeCreate/>}/>
             <Route element={<PrivateRoutes/>}>
                 <Route path={routes.SAMPLE} element={<Sample/>}/>
             </Route>
