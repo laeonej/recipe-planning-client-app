@@ -2,6 +2,7 @@
 import '@ui/index.css'
 import { TextInput, NavBar, Pill, Button } from '@ui/components';
 import { DropdownSelect } from '@src/ui/components/DropdownSelect';
+import useRecipeCreate from '@ui/hooks/useCreateRecipe';
 
 
 // third party imports
@@ -34,6 +35,7 @@ const RecipeCreate = () => {
 
     const [instructionList, setInstructionList] = useState<string[]>([])
     
+    const { create, isLoading: isCreating } = useRecipeCreate();
 
     const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
@@ -103,33 +105,40 @@ const RecipeCreate = () => {
 
 
 
-    const submitRecipe = () => {
-        let recipeBase = {
+    const submitRecipe = async () => {
+        let recipe = {
             title: title,
             description: description,
             prep_time: preptime,
             cook_time: cooktime
         }
 
-        let macroBase = {
+        let macros = {
             calories: calories,
             protein: protein,
             carbohydrates: carbohydrates,
             fats: fats
         }
         if (!isPerServing) {
-            macroBase.calories = Math.round(calories / servings)
-            macroBase.protein = Math.round(protein / servings)
-            macroBase.carbohydrates = Math.round(carbohydrates / servings)
-            macroBase.fats = Math.round(fats / servings)
+            macros.calories = Math.round(calories / servings)
+            macros.protein = Math.round(protein / servings)
+            macros.carbohydrates = Math.round(carbohydrates / servings)
+            macros.fats = Math.round(fats / servings)
         }
         
-        console.log(recipeBase)
-        console.log(macroBase)
-        console.log("tags" + tagList)
-        console.log("instructions" + instructionList)
-        console.log("ingredients: ")
-        console.log(ingredientList)
+        // console.log(recipeBase)
+        // console.log(macroBase)
+        // console.log("tags" + tagList)
+        // console.log("instructions" + instructionList)
+        // console.log("ingredients: ")
+        // console.log(ingredientList)
+        create({recipe, ingredientList, instructionList, tagList, macros}, 
+            {
+                onSuccess: (result) => {
+                    console.log(result)
+                }
+            }
+        )
     }
 
     return (
