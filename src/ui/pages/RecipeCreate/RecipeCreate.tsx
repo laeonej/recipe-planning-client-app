@@ -1,11 +1,15 @@
 // directory imports
 import '@ui/index.css'
-import { TextInput, NavBar, Pill, Button, DropdownSelect} from '@ui/components';
+import useRecipeCreate from '@ui/hooks/useCreateRecipe';
+
+
+import { TextInput, NavBar, Pill, Button, DropdownSelect, Loader } from '@ui/components';
 import { RecipeCreateInstructions } from './RecipeCreateInstructions';
 import { RecipeCreateIngredients } from './RecipeCreateIngredients';
 
 // third party imports
 import { ChangeEvent, useState, useRef } from 'react';
+
 
 
 const RecipeCreate = () => {
@@ -33,6 +37,7 @@ const RecipeCreate = () => {
     const [instructionList, setInstructionList] = useState<string[]>([])
     
     const { create, isLoading: isCreating } = useRecipeCreate();
+    
 
     const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
@@ -100,42 +105,61 @@ const RecipeCreate = () => {
         unit: string
     }
 
+    const isValidRecipe = () => {
+        if (!title) {
+            alert("Recipe Title is required.")
+            return false
+        }
+        if (!description) {
+            alert("Recipe Description is required.")
+            return false
+        }
+        if (ingredientList.length === 0) {
+            alert("At least one Ingredient is required.")
+            return false
+        }
+        return true
+    }
+
 
 
     const submitRecipe = async () => {
-        let recipe = {
-            title: title,
-            description: description,
-            prep_time: preptime,
-            cook_time: cooktime
-        }
-
-        let macros = {
-            calories: calories,
-            protein: protein,
-            carbohydrates: carbohydrates,
-            fats: fats
-        }
-        if (!isPerServing) {
-            macros.calories = Math.round(calories / servings)
-            macros.protein = Math.round(protein / servings)
-            macros.carbohydrates = Math.round(carbohydrates / servings)
-            macros.fats = Math.round(fats / servings)
-        }
-        
-        // console.log(recipeBase)
-        // console.log(macroBase)
-        // console.log("tags" + tagList)
-        // console.log("instructions" + instructionList)
-        // console.log("ingredients: ")
-        // console.log(ingredientList)
-        create({recipe, ingredientList, instructionList, tagList, macros}, 
-            {
-                onSuccess: (result) => {
-                    console.log(result)
-                }
+        if (isValidRecipe()) {
+            let recipe = {
+                title: title,
+                description: description,
+                prep_time: preptime,
+                cook_time: cooktime,
+                servings: servings
             }
-        )
+    
+            let macros = {
+                calories: calories,
+                protein: protein,
+                carbohydrates: carbohydrates,
+                fats: fats
+            }
+            if (!isPerServing) {
+                macros.calories = Math.round(calories / servings)
+                macros.protein = Math.round(protein / servings)
+                macros.carbohydrates = Math.round(carbohydrates / servings)
+                macros.fats = Math.round(fats / servings)
+            }
+            
+            
+    
+            create({recipe, ingredientList, instructionList, tagList, macros}, 
+                {
+                    onSuccess: (result) => {
+                        console.log(result)
+                    }
+                }
+            )
+        }
+    }
+
+    if (isCreating) {
+        return <Loader/>
     }
 
     return (

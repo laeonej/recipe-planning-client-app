@@ -40,14 +40,17 @@ class RecipeService {
         this.http = http;
     };
 
+    
+
     async createRecipe(recipeData: RecipeBody): Promise<RecipeResponse> {
         try {
             const response = await this.http.post('/recipe', {
+                withCredentials: true,
                 recipe: recipeData.recipe,
                 ingredients_list: recipeData.ingredientList,
                 instructions_list: recipeData.instructionList,
                 tags_list: recipeData.tagList,
-                macros: recipeData.macros
+                macros: recipeData.macros,
 
             },
             {
