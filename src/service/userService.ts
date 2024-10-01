@@ -26,6 +26,12 @@ export type AuthResponse = {
     user_id: number,
 }
 
+export type GetUserResponse = {
+    email: string,
+    username: string,
+    user_id: number
+}
+
 class UserService {
     http: AxiosInstance;
 
@@ -77,10 +83,12 @@ class UserService {
 
     // this is a sample get query. Update when we implement
     // user page.
-    async getUser(): Promise<Boolean> {
+    async getUser(userId: number): Promise<GetUserResponse> {
         try {
-            const response = await this.http.get('/user', {
-                withCredentials: true
+            const response = await this.http.get('/user/from-id',{
+                params: {
+                    user_id: userId
+                }
             });
             return response.data;
 

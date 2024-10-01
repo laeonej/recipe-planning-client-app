@@ -10,7 +10,7 @@ import { RecipeCreateIngredients } from './RecipeCreateIngredients';
 // third party imports
 import { ChangeEvent, useState, useRef } from 'react';
 
-
+import { IngredientBody } from '@src/service/recipeService';
 
 const RecipeCreate = () => {
 
@@ -32,7 +32,7 @@ const RecipeCreate = () => {
     const [fats, setFats] = useState(0)
     const [isPerServing, setIsPerServing] = useState(true)
 
-    const [ingredientList, setIngredientList] = useState<Ingredient[]>([])
+    const [ingredientList, setIngredientList] = useState<IngredientBody[]>([])
 
     const [instructionList, setInstructionList] = useState<string[]>([])
     
@@ -97,12 +97,6 @@ const RecipeCreate = () => {
 
     const handleTagSelect = (newTag: string) => {
         setTagList(prevTags => [...prevTags, newTag])
-    }
-
-    type Ingredient = {
-        ingredient: string,
-        amount: number,
-        unit: string
     }
 
     const isValidRecipe = () => {

@@ -2,9 +2,9 @@ import { useQuery } from 'react-query'
 import UserService from '@service/userService';
 
 
-const useGetUser = () => {
-    const { isLoading, error, data } = useQuery('getUser',
-        async () => UserService.getUser()
+const useGetUser = (userId: number) => {
+    const { isLoading, error, data } = useQuery(['getUser', userId],
+        async () => UserService.getUser(userId)
     );
 
     return {

@@ -1,12 +1,7 @@
-import { Axios, AxiosInstance } from "axios";
+import { AxiosInstance } from "axios";
 import axiosClient from "./axiosClient"
 
-export type RecipeCreateBody = {
-    title: string,
-    description: string,
-    prep_time: number,
-    cook_time: number
-}
+
 
 export type IngredientBody = {
     ingredient: string,
@@ -14,11 +9,27 @@ export type IngredientBody = {
     unit: string
 }
 
+export type InstructionBody = {
+    step_number: number,
+    step_description: string
+}
+
+export type TagBody = {
+    name: string
+}
+
 export type MacrosBody = {
     calories: number,
     protein: number,
     carbohydrates: number,
     fats: number
+}
+
+export type RecipeCreateBody = {
+    title: string,
+    description: string,
+    prep_time: number,
+    cook_time: number
 }
 
 export type RecipeBody = {
@@ -29,8 +40,24 @@ export type RecipeBody = {
     macros: MacrosBody
 }
 
-export type RecipeResponse = {
-    recipe: RecipeCreateBody
+export type RecipeDetail = {
+    author_id: number,
+    cook_time: number,
+    description: string,
+    id: number,
+    prep_time: number,
+    rating: number,
+    servings: number,
+    title: string
+}
+
+
+export type GetRecipeResponse = {
+    recipe: RecipeDetail,
+    ingredients: IngredientBody[],
+    macros: MacrosBody,
+    instructions: InstructionBody[],
+    tags: TagBody[]
 }
 
 class RecipeService {
@@ -40,9 +67,22 @@ class RecipeService {
         this.http = http;
     };
 
-    
+    async getRecipe(recipeId: number) : Promise<GetRecipeResponse> {
+        try {
+            const response = await this.http.get('/recipe', {
+                params: {
+                    recipe_id: recipeId
+                }
+            });
+            return response.data;
 
-    async createRecipe(recipeData: RecipeBody): Promise<RecipeResponse> {
+        } catch (error: any) {
+            const errorMessage = "Failed To Retreive Recipe";
+            throw new Error(errorMessage);
+        }
+    }
+
+    async createRecipe(recipeData: RecipeBody): Promise<RecipeBody> {
         try {
             const response = await this.http.post('/recipe', {
                 withCredentials: true,
