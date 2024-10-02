@@ -1,10 +1,6 @@
-type Ingredient = {
-    name: string;
-    amount: number;
-    unit: string;
-}
+import { IngredientBody } from "@src/service/recipeService";
 
 export type RecipeIngredientsCardProps = {
-    ingredients: Ingredient[];
+    ingredients: IngredientBody[];
 
 };
